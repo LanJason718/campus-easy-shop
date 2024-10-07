@@ -2,10 +2,10 @@
 export default {
   onLaunch: function () {},
   onShow: function () {},
-  onHide: function () {},
+  onHide: function () {}
 }
 </script>
 
-<style>
-/*每个页面公共css */
+<style lang="scss">
+@import './uni_modules/vk-uview-ui/index.scss';
 </style>

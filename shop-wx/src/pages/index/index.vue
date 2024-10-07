@@ -1,5 +1,7 @@
 <template>
-  <view> </view>
+  <view>
+    <u-button type="primary">主要按钮</u-button>
+  </view>
 </template>
 
 <script>
@@ -8,7 +10,7 @@ export default {
     return {}
   },
   onLoad() {},
-  methods: {},
+  methods: {}
 }
 </script>
 

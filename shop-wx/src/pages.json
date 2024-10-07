@@ -20,11 +20,15 @@
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
+		"navigationBarTitleText": "校易淘",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	},
 	"tabBar": {
+		"color": "#333",
+		"selectedColor": "#A9ECA2",
+		"borderStyle": "white",
+		"backgroundColor": "#fff",
 		"list": [{
 				"text": "首页",
 				"pagePath": "pages/index/index",
