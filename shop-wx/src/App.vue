@@ -8,4 +8,5 @@ export default {
 
 <style lang="scss">
 @import './uni_modules/vk-uview-ui/index.scss';
+@import './static/iconfont/iconfont.css';
 </style>
