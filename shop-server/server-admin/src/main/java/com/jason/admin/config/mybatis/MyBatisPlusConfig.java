@@ -1,4 +1,4 @@
-package com.jason.config.mybatis;
+package com.jason.admin.config.mybatis;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@MapperScan("com.jason.*.*.mapper")
+@MapperScan("com.jason.admin.mapper")
 public class MyBatisPlusConfig {
     // 最新版
     @Bean
