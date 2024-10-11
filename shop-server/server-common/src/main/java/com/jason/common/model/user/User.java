@@ -13,20 +13,20 @@ import java.sql.Timestamp;
 @TableName("user")
 public class User implements Serializable {
 
-    @TableId(type = IdType.AUTO)
-    private Integer userId;   // 用户id
-
+    @TableId
+    private int uid;   // 用户id
+    private String openId;
     private String username;  // 账号
 
     private String password;  // 密码
 
-    private String nickName; //昵称
+    private String nickname; //昵称
     
     private String phone;     // 手机号
 
     private String gender;    // 性别
 
-    private String status;    // 状态 0：启用 1：禁用
+    private int status;    // 状态 0：启用 1：禁用
 
     private String role;      // 角色 0：普通用户 1：管理员
 
