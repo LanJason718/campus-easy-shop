@@ -75,15 +75,17 @@ class Routine {
     return new Promise((resolve, reject) => {
       login(code)
         .then((res) => {
-          console.log(res, 'login')
-          store.commit('LOGIN', {
-            token: res.data.token
-          })
-          store.commit('SETUID', res.data.uid)
+          console.log(res)
+          if (res.data.type === 'login') {
+            store.commit('LOGIN', {
+              token: res.data.token
+            })
+            store.commit('SETUID', res.data.uid)
+          }
           return resolve(res)
         })
-        .catch((res) => {
-          return reject(res)
+        .catch((err) => {
+          return reject(err)
         })
     })
   }

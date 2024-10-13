@@ -28,5 +28,6 @@ module.exports = {
   //缓存纬度
   CACHE_LATITUDE: 'LATITUDE',
   //app手机信息
-  PLATFORM: 'systemPlatform'
+  PLATFORM: 'systemPlatform',
+  NAV_BAR_HEIGHT: 'navBarHeight'
 }

@@ -13,8 +13,8 @@ page {
   font-size: $uni-font-size-base;
   color: $uni-text-color;
 }
-
-page ::v-deep ::-webkit-scrollbar {
+::-webkit-scrollbar {
+  display: none;
   width: 0;
   height: 0;
   color: transparent;

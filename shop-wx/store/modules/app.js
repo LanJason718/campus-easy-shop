@@ -1,11 +1,12 @@
 import { getUserInfo } from '../../api/user.js'
-import { LOGIN_STATUS, UID, PLATFORM, USER_INFO } from '../../config/cache'
+import { LOGIN_STATUS, UID, PLATFORM, USER_INFO, NAV_BAR_HEIGHT } from '../../config/cache'
 import Cache from '../../utils/cache'
 
 const state = {
   token: Cache.get(LOGIN_STATUS) || '',
   userInfo: Cache.get(USER_INFO) ? JSON.parse(Cache.get(USER_INFO)) : null,
-  uid: Cache.get(UID) || null
+  uid: Cache.get(UID) || null,
+  navBarHeight: Cache.get(NAV_BAR_HEIGHT) || '0px'
 }
 
 const mutations = {
@@ -37,6 +38,10 @@ const mutations = {
   changInfo(state, payload) {
     state.userInfo[payload.amount1] = payload.amount2
     Cache.set(USER_INFO, state.userInfo)
+  },
+  setNavBarHeight(state, val) {
+    state.navBarHeight = val
+    Cache.set(NAV_BAR_HEIGHT, val)
   }
 }
 

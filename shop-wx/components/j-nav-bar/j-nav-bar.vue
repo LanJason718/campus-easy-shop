@@ -14,8 +14,8 @@
         }"
       >
         <!-- 返回与主页按钮 -->
-        <view v-if="isBack && isHome" class="btnBox" :style="{ border: `2rpx solid ${fontColor}` }">
-          <i class="iconfont icon-fanhui btn" :style="{ color: fontColor, borderRight: `2rpx solid ${fontColor}` }" @click="goBack"></i>
+        <view v-if="isBack && isHome" class="btnBox" :style="{ border: `2rpx solid ${borderColor}` }">
+          <i class="iconfont icon-fanhui btn" :style="{ color: fontColor, borderRight: `2rpx solid ${borderColor}` }" @click="goBack"></i>
           <i class="iconfont icon-shouye btn" :style="{ color: fontColor }" @click="goHome"></i>
         </view>
         <!-- 仅返回按钮 -->
@@ -39,7 +39,7 @@
       </view>
     </view>
     <!-- 占位 -->
-    <view :style="{ height: `calc(${statusBarHeight} + ${contentHeight} + ${contentVerticalSpacing} * 2)` }"></view>
+    <view :style="{ height: `${totalHeight}px` }"></view>
   </view>
 </template>
 
@@ -49,6 +49,10 @@ export default {
     bgColor: {
       type: String,
       default: '#fff'
+    },
+    borderColor: {
+      type: String,
+      default: '#c8c7cc'
     },
     fontColor: {
       type: String,
@@ -79,7 +83,8 @@ export default {
       contentWidthFill: '0px',
       contentVerticalSpacing: '0px',
       contentSideSpacing: '0px',
-      middleMaxWidth: '0px'
+      middleMaxWidth: '0px',
+      totalHeight: '0'
     }
   },
   methods: {
@@ -87,7 +92,9 @@ export default {
       uni.navigateBack()
     },
     goHome() {
-      this.$emit('navigate-home')
+      uni.switchTab({
+        url: '/pages/index/index'
+      })
     }
   },
   mounted() {
@@ -101,6 +108,8 @@ export default {
     this.contentVerticalSpacing = `${menuButtonInfo.top - systemInfo.statusBarHeight}px`
     this.contentSideSpacing = `${systemInfo.screenWidth - menuButtonInfo.right}px`
     this.middleMaxWidth = `${2 * (systemInfo.screenWidth / 2 - menuButtonInfo.width - 2 * (systemInfo.screenWidth - menuButtonInfo.right))}px`
+    this.totalHeight = parseFloat(this.statusBarHeight) + parseFloat(this.contentHeight) + 2 * parseFloat(this.contentVerticalSpacing)
+    this.$store.commit('setNavBarHeight', this.totalHeight)
   }
 }
 </script>

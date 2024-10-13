@@ -15,8 +15,17 @@ export function getLogo() {
  * @param code String
  */
 export function login(code) {
-  return request.get('wechat/authorize/program/login?code=' + code, {}, { noAuth: true })
+  return request.get('wechat/login?code=' + code, {}, { noAuth: true })
 }
+
+/**
+ * 小程序注册
+ * @param code String
+ */
+export function register(data) {
+  return request.post('wechat/register', data, { noAuth: true })
+}
+
 /**
  * 分享
  * @returns {*}

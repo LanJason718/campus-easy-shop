@@ -13,58 +13,71 @@
         </view>
       </template>
     </j-nav-bar>
-    <!-- banner -->
-    <view class="banner" v-if="bannerList.length">
-      <swiper
-        class="swiper-container"
-        indicator-dots="true"
-        autoplay
-        :circular="true"
-        :interval="4000"
-        :duration="500"
-        indicator-color="rgba(255,255,255,0.6)"
-        indicator-active-color="#fff"
-        easing-function="easeInOutCubic"
-      >
-        <swiper-item v-for="(item, index) in bannerList" :key="index">
-          <image :src="item.pic" lazy-load></image>
-        </swiper-item>
-      </swiper>
-    </view>
-
-    <!-- 金刚区 -->
-    <!-- 吸顶分类 -->
-    <!-- 瀑布流 -->
-    <view class="flow-container">
-      <u-waterfall v-model="flowList" ref="uWaterfall1">
-        <template v-slot:left="{ leftList }">
-          <view class="warter-left" v-for="(item, index) in leftList" :key="index">
-            <u-lazy-load threshold="-450" border-radius="10" :image="item.image" :index="index"></u-lazy-load>
-            <view class="title">
-              {{ item.title }}
+    <scroll-view :scroll-into-view="scrollToTab" @scroll="scroll" scroll-y :style="{ height: `calc(100vh - ${navBarHeightPx}px)` }">
+      <!-- banner -->
+      <view class="banner" v-if="bannerList.length">
+        <swiper
+          class="swiper-container"
+          indicator-dots="true"
+          autoplay
+          :circular="true"
+          :interval="4000"
+          :duration="500"
+          indicator-color="rgba(255,255,255,0.6)"
+          indicator-active-color="#fff"
+          easing-function="easeInOutCubic"
+        >
+          <swiper-item v-for="(item, index) in bannerList" :key="index">
+            <image :src="item.pic" lazy-load></image>
+          </swiper-item>
+        </swiper>
+      </view>
+      <!-- 金刚区 -->
+      <u-grid :col="4" :border="false">
+        <u-grid-item v-for="(item, index) in 8" :key="index">
+          <u-icon name="photo" :size="46"></u-icon>
+          <view class="grid-text">图片</view>
+        </u-grid-item>
+      </u-grid>
+      <!-- 吸顶分类 -->
+      <u-sticky id="content" :offset-top="navBarHeightRpx" :h5-nav-height="navBarHeightPx">
+        <view class="u-border-top">
+          <u-tabs :list="list" v-model="current" @change="TabsChange"></u-tabs>
+        </view>
+      </u-sticky>
+      <!-- 瀑布流 -->
+      <view class="flow-container">
+        <u-waterfall v-model="flowList">
+          <template v-slot:left="{ leftList }">
+            <view class="warter-left" v-for="(item, index) in leftList" :key="index">
+              <u-lazy-load threshold="1000" border-radius="10" :image="item.image" :index="index"></u-lazy-load>
+              <view class="title">
+                {{ item.title }}
+              </view>
+              <view class="price">{{ item.price }}元</view>
+              <!-- 头像 昵称 -->
             </view>
-            <view class="price">{{ item.price }}元</view>
-            <!-- 头像 昵称 -->
-          </view>
-        </template>
+          </template>
 
-        <template v-slot:right="{ rightList }">
-          <view class="warter-right" v-for="(item, index) in rightList" :key="index">
-            <u-lazy-load threshold="-450" border-radius="10" :image="item.image" :index="index"></u-lazy-load>
-            <view class="title">
-              {{ item.title }}
+          <template v-slot:right="{ rightList }">
+            <view class="warter-right" v-for="(item, index) in rightList" :key="index" :height="300">
+              <u-lazy-load threshold="1000" border-radius="10" :image="item.image" :index="index"></u-lazy-load>
+              <view class="title">
+                {{ item.title }}
+              </view>
+              <view class="price">{{ item.price }}元</view>
+              <!-- 头像 昵称 -->
             </view>
-            <view class="price">{{ item.price }}元</view>
-            <!-- 头像 昵称 -->
-          </view>
-        </template>
-      </u-waterfall>
-      <u-loadmore bg-color="rgb(240, 240, 240)" :status="loadStatus" @loadmore="addRandomData"></u-loadmore>
-    </view>
+          </template>
+        </u-waterfall>
+        <u-loadmore bg-color="rgb(240, 240, 240)" :status="loadStatus" @loadmore="addRandomData"></u-loadmore>
+      </view>
+    </scroll-view>
   </view>
 </template>
 
 <script>
+import { px2rpx } from '@/utils/common.js'
 export default {
   data() {
     return {
@@ -123,8 +136,48 @@ export default {
           title: '球鞋',
           image: '/static/images/dev/22.jpeg'
         }
-      ]
+      ],
+      list: [
+        {
+          name: '待收货'
+        },
+        {
+          name: '待付款'
+        },
+        {
+          name: '待评价'
+        }
+      ],
+      current: 0,
+      scrollToTab: ''
     }
+  },
+  computed: {
+    navBarHeightPx() {
+      return this.$store.state.app.navBarHeight
+    },
+    navBarHeightRpx() {
+      const val = this.$store.state.app.navBarHeight
+      return px2rpx(val)
+    }
+  },
+  methods: {
+    TabsChange(index) {
+      console.log('index', index)
+      this.scrollToTab = 'content'
+      setTimeout(() => {
+        this.scrollToTab = ''
+      }, 100)
+    },
+    getProductData() {
+      for (let i = 0; i < 5; i++) {
+        this.flowList = this.flowList.concat(this.flowList)
+      }
+    },
+    scroll() {}
+  },
+  created() {
+    this.getProductData()
   }
 }
 </script>
@@ -133,6 +186,11 @@ export default {
 .logo {
   font-size: 16px;
   font-weight: bold;
+}
+.grid-text {
+  font-size: 28rpx;
+  margin-top: 4rpx;
+  color: $u-type-info;
 }
 .search-container {
   box-sizing: border-box;
@@ -161,12 +219,12 @@ export default {
   .warter-left {
     background: #eee;
     border-radius: 16rpx;
-    margin: 10rpx;
+    margin: 12rpx;
   }
   .warter-right {
     background: #eee;
     border-radius: 16rpx;
-    margin: 10rpx 10rpx 10rpx 0;
+    margin: 12rpx 12rpx 12rpx 0;
   }
 }
 </style>

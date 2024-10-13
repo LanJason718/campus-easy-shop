@@ -40,13 +40,6 @@ $uni-color-success: #4cd964;
 $uni-color-warning: #f0ad4e;
 $uni-color-error: #dd524d;
 
-/* 文字基本颜色 */
-$uni-text-color: #333; // 基本色
-$uni-text-color-inverse: #fff; // 反色
-$uni-text-color-grey: #999; // 辅助灰色，如加载更多的提示信息
-$uni-text-color-placeholder: #808080;
-$uni-text-color-disable: #c0c0c0;
-
 /* 背景颜色 */
 $uni-bg-color: #fff;
 $uni-bg-color-grey: #f8f8f8;
@@ -56,7 +49,17 @@ $uni-bg-color-mask: rgba(0, 0, 0, 0.4); // 遮罩颜色
 /* 边框颜色 */
 $uni-border-color: #c8c7cc;
 
+$border-sm: 2rpx solid #f0f0f0;
+$border-base: 2rpx solid $uni-border-color;
+
 /* 尺寸变量 */
+
+/* 文字基本颜色 */
+$uni-text-color: #333; // 基本色
+$uni-text-color-inverse: #fff; // 反色
+$uni-text-color-grey: #999; // 辅助灰色，如加载更多的提示信息
+$uni-text-color-placeholder: #808080;
+$uni-text-color-disable: #c0c0c0;
 
 /* 文字尺寸 */
 $uni-font-size-sm: 28rpx;
@@ -80,10 +83,18 @@ $uni-spacing-row-base: 10px;
 $uni-spacing-row-lg: 15px;
 
 /* 垂直间距 */
-$uni-spacing-col-sm: 4px;
-$uni-spacing-col-base: 8px;
-$uni-spacing-col-lg: 12px;
-
+$uni-spacing-col-sm: 8rpx;
+$uni-spacing-col-base: 16rpx;
+$uni-spacing-col-lg: 24rpx;
+@mixin pb-sm {
+  padding-bottom: 8rpx;
+}
+@mixin pb-base {
+  padding-bottom: 16rpx;
+}
+@mixin pb-lg {
+  padding-bottom: 24rpx;
+}
 /* 透明度 */
 $uni-opacity-disabled: 0.3; // 组件禁用态的透明度
 
