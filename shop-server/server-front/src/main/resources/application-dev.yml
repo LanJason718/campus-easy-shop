@@ -46,4 +46,5 @@ swagger:
     password: 1 #访问swagger的密码
 
 shop:
-  async-config: true
+  async-config: false
+  image-path: D:/www/

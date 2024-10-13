@@ -2,6 +2,7 @@ package com.jason.service.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jason.common.exception.ShopException;
 import com.jason.common.model.system.SystemConfig;
 import com.jason.service.dao.SystemConfigDao;
 import com.jason.service.service.SystemConfigService;
@@ -92,6 +93,21 @@ public class SystemConfigServiceImpl extends ServiceImpl<SystemConfigDao, System
         for (SystemConfig systemConfig : systemConfigList) {
             redisUtil.hmSet(redisKey, systemConfig.getName(), systemConfig.getValue());
         }
+    }
+
+    /**
+     * 根据 name 获取 value 找不到抛异常
+     * @param name menu name
+     * @return String
+     */
+    @Override
+    public String getValueByKeyException(String name) {
+        String value = get(name);
+        if (null == value) {
+            throw new ShopException("没有找到"+ name +"数据");
+        }
+
+        return value;
     }
 }
 

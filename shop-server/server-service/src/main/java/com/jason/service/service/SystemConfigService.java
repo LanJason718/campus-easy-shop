@@ -14,4 +14,12 @@ public interface SystemConfigService extends IService<SystemConfig> {
      * @return String
      */
     String getValueByKey(String key);
+
+    /**
+     * 根据 name 获取 value 找不到抛异常
+     * @param key menu name
+     * @return String
+     */
+    String getValueByKeyException(String key);
+
 }

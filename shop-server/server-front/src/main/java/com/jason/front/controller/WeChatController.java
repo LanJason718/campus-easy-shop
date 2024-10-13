@@ -1,5 +1,6 @@
 package com.jason.front.controller;
 
+import com.jason.common.request.RegisterRequest;
 import com.jason.common.response.CommonResult;
 import com.jason.common.response.LoginResponse;
 import com.jason.front.service.UserCenterService;
@@ -30,11 +31,18 @@ public class WeChatController {
      * 微信登录小程序授权登录
      */
     @ApiOperation(value = "微信小程序授权登录")
-    @GetMapping("/authorize/program/login")
-    public CommonResult programLogin(@RequestParam("code") String code){
+    @GetMapping("/login")
+    public CommonResult login(@RequestParam("code") String code){
         return CommonResult.success(userCenterService.weChatAuthorizeProgramLogin(code));
     }
-
+    /**
+     * 微信登录小程序注册
+     */
+    @ApiOperation(value = "微信小程序授权登录")
+    @PostMapping("/register")
+    public CommonResult register(@RequestBody RegisterRequest registerRequest){
+        return CommonResult.success(userCenterService.weChatRegister(registerRequest));
+    }
 
     /**
      * 小程序获取授权logo

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.jason.common.model.user.User;
 import com.jason.common.request.*;
 import com.jason.common.response.*;
+import com.jason.common.vo.MyRecord;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -23,5 +24,5 @@ public interface UserCenterService extends IService<User> {
     String getLogo();
 
 
-
+    LoginResponse weChatRegister(RegisterRequest registerRequest);
 }
