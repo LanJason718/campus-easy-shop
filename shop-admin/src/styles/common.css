@@ -1,0 +1,25 @@
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.multi-ellipsis-2,
+.multi-ellipsis-3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.multi-ellipsis-2 {
+  -webkit-line-clamp: 2;
+}
+.multi-ellipsis-3 {
+  -webkit-line-clamp: 3;
+}
+
+.clearfix::after {
+  clear: both;
+  content: '';
+  display: table;
+}
