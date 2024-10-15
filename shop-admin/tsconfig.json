@@ -7,5 +7,14 @@
     {
       "path": "./tsconfig.app.json"
     }
-  ]
+  ],
+  "compilerOptions": {
+    "baseUrl": ".", // paths 路径解析起点
+    "paths": {
+      "@/*": [
+        // 别名路径设置
+        "src/*"
+      ]
+    }
+  }
 }
