@@ -8,7 +8,7 @@
     :close-on-click-modal="false"
   >
     <div class="container" :style="{ height: height + 'px' }">
-      <slot name="content"></slot>
+      <slot></slot>
     </div>
     <template #footer>
       <span class="dialog-footer">

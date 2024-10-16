@@ -12,7 +12,9 @@
     </div>
     <div class="right">
       <!-- 切换主题 -->
-      <toggle-theme />
+      <div style="margin: 0 20px">
+        <toggle-theme />
+      </div>
       <!-- 个人 -->
       <el-dropdown>
         <span class="el-dropdown-link">
