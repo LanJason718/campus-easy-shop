@@ -36,11 +36,11 @@ const toggleActive = () => {
 </script>
 <style>
 ::view-transition-old(root) {
-  animation: fadeOut 0.5s forwards;
+  animation: fadeOut 0.6s forwards;
 }
 
 ::view-transition-new(root) {
-  animation: fadeIn 0.5s forwards;
+  animation: fadeIn 0.6s forwards;
 }
 
 @keyframes fadeOut {

@@ -1,0 +1,19 @@
+/* 笔记本电脑 (大于等于 992px) */
+@media (min-width: 992px) {
+}
+
+/* 手机 (小于 992px) */
+@media (max-width: 991.98px) {
+  .el-breadcrumb {
+    display: none;
+  }
+  .el-aside {
+    position: fixed;
+    left: 0;
+    top: var(--navbar-height);
+    bottom: 0;
+  }
+  .el-aside .el-menu.el-menu--vertical.el-menu--collapse {
+    width: 0;
+  }
+}

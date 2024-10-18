@@ -1,14 +1,12 @@
 <template>
   <el-scrollbar>
-    <menu-logo></menu-logo>
+    <logo />
     <el-menu
       router
       class="el-menu-vertical"
-      default-active="/dashboard"
-      background-color="var(--sub-menu-background)"
-      text-color="var(--menu-color)"
+      :default-active="active"
       :unique-opened="true"
-      :collapse="sidebarCollapse"
+      :collapse="isCollapse"
     >
       <menu-item v-for="menu in menuList" :menu="menu" :key="menu.path" />
     </el-menu>
@@ -16,13 +14,18 @@
 </template>
 
 <script setup lang="ts">
+import Logo from '../Logo.vue'
 import MenuItem from './MenuItem.vue'
-import MenuLogo from './MenuLogo.vue'
 import { reactive, ref } from 'vue'
 import { useAppStore } from '@/stores/app'
 import { storeToRefs } from 'pinia'
+import { useRoute } from 'vue-router'
+const route = useRoute()
 const appStore = useAppStore()
-const { sidebarCollapse } = storeToRefs(appStore)
+const { isCollapse } = storeToRefs(appStore)
+
+const active = ref(route.fullPath)
+
 //菜单数据
 let menuList = reactive([
   {
@@ -178,11 +181,100 @@ let menuList = reactive([
 
 <style lang="scss" scoped>
 .el-menu {
-  border-right: 0;
   --el-transition-duration: 0.5s;
   transition-timing-function: ease;
+
+  --el-menu-bg-color: var(--theme-color);
+  --el-menu-text-color: var(--theme-text-color);
+
+  :deep(.el-sub-menu__title),
+  :deep(.el-menu-item) {
+    font-weight: 600 !important;
+    i {
+      color: var(--menu-icon-color);
+    }
+  }
+
+  :deep(.el-sub-menu__title:hover),
+  :deep(.el-menu-item:hover) {
+    color: var(--menu-hover-text-color);
+    i {
+      color: var(--menu-hover-text-color);
+    }
+  }
+
+  :deep(.el-sub-menu.is-active) {
+    .el-sub-menu__title {
+      color: var(--menu-active-text-color);
+      i {
+        color: var(--menu-active-text-color);
+      }
+    }
+    .el-menu-item.is-active {
+      color: var(--menu-active-text-color);
+      i {
+        color: var(--menu-active-text-color);
+      }
+    }
+  }
+  :deep(.el-menu-item.is-active) {
+    color: var(--menu-active-text-color);
+    i {
+      color: var(--menu-active-text-color);
+    }
+  }
+
+  :deep(.el-menu-item) {
+    border-bottom: 1px solid var(--menu-border-color);
+    transition: none;
+  }
+  :deep(.el-sub-menu .el-menu-item) {
+    border-bottom: none;
+    border-top: 1px solid var(--menu-border-color);
+  }
+  :deep(.el-sub-menu) {
+    border-bottom: 1px solid var(--menu-border-color);
+  }
+
+  :deep(.el-sub-menu .el-menu.el-menu--inline) {
+    padding-left: 10px;
+  }
 }
 .el-menu-vertical:not(.el-menu--collapse) {
-  width: 200px;
+  width: var(--menu-width);
+}
+:deep(
+    .el-menu--vertical:not(.el-menu--collapse):not(.el-menu--popup-container)
+      .el-sub-menu
+      .el-menu-item
+  ) {
+  padding-left: calc(
+    -10px + var(--el-menu-base-level-padding) + var(--el-menu-level) * var(--el-menu-level-padding)
+  );
+}
+:deep(
+    .el-menu--vertical:not(.el-menu--collapse):not(.el-menu--popup-container)
+      .el-menu-item
+  ) {
+  padding-left: calc(
+    var(--el-menu-base-level-padding) + var(--el-menu-level) *
+      var(--el-menu-level-padding)
+  );
+}
+</style>
+<style lang="scss">
+.el-popper {
+  background-color: var(--theme-color) !important;
+  color: var(--theme-text-color) !important;
+  .el-menu-item {
+    color: var(--theme-text-color);
+    &.is-active {
+      color: var(--menu-active-text-color);
+    }
+  }
+}
+
+.el-popper .el-menu-item:hover {
+  color: var(--menu-hover-text-color);
 }
 </style>

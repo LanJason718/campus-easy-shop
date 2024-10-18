@@ -1,0 +1,37 @@
+//正常模式
+html {
+  --menu-background: #2b68c9;
+  --sub-menu-background: #2b68c9;
+  --menu-color: #fff;
+}
+
+//暗黑模式
+html.dark {
+  img,
+  .dark-img-bg {
+    filter: brightness(0.8) saturate(1.25);
+  }
+  --menu-background: #001529;
+  --sub-menu-background: #001529;
+  --menu-color: #fff;
+}
+
+html {
+  --theme-color: #fff;
+  --theme-bg-color: #edf1f7;
+
+  --theme-text-color: #222b45;
+  --menu-active-text-color: #3366ff;
+  --menu-hover-text-color: #598bff;
+  --menu-icon-color: #8f9bb3;
+  --menu-border-color: #edf1f7;
+
+  --box-shadow-color: #2c33491a;
+}
+html.dark {
+  --theme-color: #222b45;
+  --theme-bg-color: #151a30;
+  --theme-text-color: #fff;
+  --menu-border-color: #151a30;
+  --box-shadow-color: #1a1f33;
+}

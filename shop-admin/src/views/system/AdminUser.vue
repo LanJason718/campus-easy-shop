@@ -17,6 +17,7 @@
     </el-form>
 
     <base-dialog
+      :width="500"
       title="新增管理员"
       :visible="dialog.visible"
       @onClose="onClose"
@@ -37,10 +38,10 @@
         <el-form-item prop="nickname" label="姓名">
           <el-input v-model="adminModel.nickname"></el-input>
         </el-form-item>
-        <el-form-item prop="sex" label="性别">
-          <el-radio-group v-model="adminModel.sex">
-            <el-radio :label="'0'">男</el-radio>
-            <el-radio :label="'1'">女</el-radio>
+        <el-form-item prop="gender" label="性别">
+          <el-radio-group v-model="adminModel.gender">
+            <el-radio :label="0">男</el-radio>
+            <el-radio :label="1">女</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item prop="phone" label="电话">
@@ -48,8 +49,8 @@
         </el-form-item>
         <el-form-item prop="status" label="状态">
           <el-radio-group v-model="adminModel.status">
-            <el-radio :label="'0'">启用</el-radio>
-            <el-radio :label="'1'">停用</el-radio>
+            <el-radio :label="1">启用</el-radio>
+            <el-radio :label="0">停用</el-radio>
           </el-radio-group>
         </el-form-item>
       </el-form>
@@ -61,8 +62,9 @@
 import BaseDialog from '@/components/BaseDialog.vue'
 import useDialog from '@/hooks/useDialog'
 import { reactive, ref } from 'vue'
-import type { Admin } from '@/model/admin'
+import type { SystemAdmin } from '@/model/system/SystemAdmin'
 import type { FormInstance, FormRules } from 'element-plus'
+import { adminAdd } from '@/api/systemAdmin'
 
 const { dialog, onShow, onClose } = useDialog()
 
@@ -71,26 +73,30 @@ const searchCilck = () => {}
 
 const adminFromRef = ref<FormInstance>()
 
-const adminModel = reactive<Admin>({
-  userId: '',
+const adminModel = reactive<SystemAdmin>({
   username: '',
   password: '',
   nickname: '',
   phone: '',
-  sex: '',
-  status: '',
+  gender: 0,
+  role: 0,
+  loginCount: 0,
+  status: 0,
+  createTime: new Date(),
+  updateTime: new Date(),
 })
 const rules = reactive<FormRules>({
   username: [{ required: true, message: '请输入账号' }],
   password: [{ required: true, message: '请输入登录密码', trigger: 'blur' }],
   nickname: [{ required: true, message: '请输入姓名', trigger: 'blur' }],
   phone: [{ required: true, message: '请输入电话', trigger: 'blur' }],
-  sex: [{ required: true, message: '请输入性别', trigger: 'blur' }],
+  gender: [{ required: true, message: '请输入性别', trigger: 'blur' }],
   status: [{ required: true, message: '请输入状态', trigger: 'blur' }],
 })
 const onConfirm = () => {
-  adminFromRef.value?.validate((valid: Boolean) => {
+  adminFromRef.value?.validate(async (valid: Boolean) => {
     if (valid) {
+      const res = await adminAdd(adminModel)
       dialog.visible = false
     }
   })

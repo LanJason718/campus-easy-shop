@@ -2,11 +2,10 @@
   <div class="navbar">
     <div class="left">
       <!-- 汉堡包 -->
-      <hamburger
-        style="padding-right: 20px"
-        :isActive="sidebarCollapse"
-        @toggleClick="toggleClick"
-      />
+      <div class="appHamburger">
+        <hamburger :isActive="isCollapse" @toggleClick="toggleClick" />
+      </div>
+
       <!-- 面包屑 -->
       <breadcrumb />
     </div>
@@ -44,10 +43,11 @@ import Breadcrumb from './Breadcrumb'
 import { useAppStore } from '@/stores/app'
 import { storeToRefs } from 'pinia'
 const appStore = useAppStore()
-const { sidebarCollapse } = storeToRefs(appStore)
+const { isCollapse } = storeToRefs(appStore)
+
 //汉堡包
 const toggleClick = () => {
-  appStore.toggleSidebar()
+  appStore.toggleCollapse()
 }
 </script>
 

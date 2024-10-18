@@ -1,5 +1,5 @@
 <template>
-  <div @click="toggleClick">
+  <div @click="toggleClick" style="margin: 0 var(--el-menu-base-level-padding)">
     <el-icon :size="24" :class="{ 'is-active': isActive }" class="hamburger"
       ><Fold
     /></el-icon>
@@ -12,6 +12,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  fun: {
+    type: String,
+    default: 'computer',
+  },
 })
 const emit = defineEmits(['toggleClick'])
 function toggleClick() {
@@ -22,6 +26,9 @@ function toggleClick() {
 <style scoped>
 .hamburger {
   transition: transform 0.5s;
+
+  color: #8f9bb3;
+  cursor: pointer;
 }
 .hamburger.is-active {
   transform: rotateY(180deg);

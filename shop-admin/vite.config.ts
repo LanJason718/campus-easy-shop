@@ -21,6 +21,13 @@ export default defineConfig({
     host: '0.0.0.0', //解决控制台 Network: use --host to expose
     port: 8088,
     open: true,
+    proxy: {
+      '/api': {
+        target: 'http:127.0.0.1:8089',
+        changeOrigin: false,
+        rewrite: path => path.replace(/^\/api/, ''),
+      },
+    },
   },
   resolve: {
     alias: {

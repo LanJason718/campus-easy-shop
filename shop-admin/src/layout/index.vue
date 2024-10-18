@@ -1,8 +1,8 @@
 <template>
   <el-container class="layout-container">
-    <el-aside width="auto"><sidebar /></el-aside>
+    <el-header> <navbar></navbar></el-header>
     <el-container>
-      <el-header> <navbar></navbar></el-header>
+      <el-aside width="auto"><sidebar /></el-aside>
       <el-main> <layout-main></layout-main></el-main>
     </el-container>
   </el-container>
@@ -14,17 +14,26 @@ import Navbar from './components/navbar'
 import LayoutMain from './components/main'
 </script>
 
+<style lang="scss">
+@import './meida.scss';
+</style>
 <style lang="scss" scoped>
-@import '@/styles/variables.scss';
-
 .layout-container {
   height: 100%;
   .el-aside {
-    background-color: var(--sub-menu-background);
+    background-color: var(--theme-color);
+    box-shadow: 0 8px 16px var(--box-shadow-color);
+    z-index: 22;
   }
   .el-header {
-    background-color: var(--el-color-primary-light-7);
-    height: $navbar-height;
+    background-color: var(--theme-color);
+    height: var(--navbar-height);
+    box-shadow: 0 8px 16px var(--box-shadow-color);
+    z-index: 23;
+    padding: 0;
+  }
+  .el-main {
+    background-color: var(--theme-bg-color);
   }
 }
 </style>

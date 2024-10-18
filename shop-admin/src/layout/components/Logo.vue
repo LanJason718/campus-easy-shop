@@ -1,8 +1,14 @@
 <template>
   <div class="logoBox" @click="goHome">
     <Transition name="logo">
-      <div class="logo" v-if="isCollapse">淘</div>
-      <div class="logo" v-else>校易淘后台管理</div>
+      <template v-if="screenLevel === 1">
+        <div class="logo" v-if="isCollapse">淘</div>
+        <div class="logo" v-else>校易淘后台管理</div>
+      </template>
+      <template v-else>
+        <div class="logo" v-if="isCollapse"></div>
+        <div class="logo" v-else>校易淘后台管理</div>
+      </template>
     </Transition>
   </div>
 </template>
@@ -13,7 +19,7 @@ import { useAppStore } from '@/stores/app'
 import { computed, ref, watch } from 'vue'
 const appStore = useAppStore()
 const isCollapse = ref(false)
-
+const screenLevel = computed(() => appStore.screenLevel)
 watch(
   () => appStore.getCollapse,
   newVal => {
@@ -41,6 +47,8 @@ const goHome = () => {
 .logoBox {
   width: 100%;
   height: 50px;
+  border-bottom: 1px solid var(--menu-border-color);
+  overflow: hidden;
 
   .logo {
     height: 50px;

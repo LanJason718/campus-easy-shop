@@ -1,0 +1,36 @@
+.el-breadcrumb .el-breadcrumb__item {
+  cursor: pointer;
+}
+.el-breadcrumb__inner,
+.el-breadcrumb__inner a {
+  font-weight: bold;
+}
+
+.el-dialog {
+  border-radius: 6px !important;
+  padding: 0 !important;
+
+  .el-dialog__header {
+    border-bottom: 1px solid #dcdfe6;
+    padding: 20px !important;
+    display: flex;
+    justify-content: space-between;
+    .el-dialog__headerbtn {
+      position: relative;
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .el-dialog__body {
+    padding: 20px !important;
+  }
+  .el-dialog__footer {
+    border-top: 1px solid #dcdfe6;
+    padding: 20px;
+  }
+}
+
+.el-menu {
+  border-right: 0;
+}

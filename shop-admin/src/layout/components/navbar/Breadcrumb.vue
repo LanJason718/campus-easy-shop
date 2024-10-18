@@ -1,5 +1,5 @@
 <template>
-  <el-breadcrumb class="app-breadcrumb" separator="/">
+  <el-breadcrumb separator="/">
     <transition-group name="breadcrumb">
       <el-breadcrumb-item
         v-for="item in tabs"
